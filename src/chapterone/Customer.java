@@ -44,27 +44,9 @@ public class Customer {
         int frequentRenterPoints = 0;
         String result = "chapterone.Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            double thisAmount = 0;
+            double thisAmount;
 
-            switch (rental.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount +=2;
-                    if (rental.getDaysRented() > 2) {
-                        thisAmount += (rental.getDaysRented() - 2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += rental.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDREN:
-                    thisAmount += 1.5;
-                    if (rental.getDaysRented() > 3) {
-                        thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                    }
-                    break;
-                default:
-
-            }
+            thisAmount = amountFor(rental);
 
             frequentRenterPoints++;
 
@@ -78,5 +60,37 @@ public class Customer {
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
+    }
+
+    /**
+     * @desc 将statement方法中的switch部分(逻辑泥团)提炼到独立函数中。变量rental不会被修改,
+     *        可以被当作参数传入。变量thisAmount会且只有这一个变量会被修改,可以把它当做返回值
+     * @author Robert-JQ
+     * @date 2018/5/9 22:51
+     * @param rental 租赁对象
+     * @return double
+     */
+    private double amountFor(Rental rental) {
+        double thisAmount = 0;
+        switch (rental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                thisAmount +=2;
+                if (rental.getDaysRented() > 2) {
+                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += rental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDREN:
+                thisAmount += 1.5;
+                if (rental.getDaysRented() > 3) {
+                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                }
+                break;
+            default:
+                break;
+        }
+        return thisAmount;
     }
 }
