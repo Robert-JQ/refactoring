@@ -37,7 +37,7 @@ public class Rental {
      * @date 2018/5/9 23:20
      * @return double
      */
-    public double getCharge() {
+    protected double getCharge() {
         double result = 0;
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -59,5 +59,19 @@ public class Rental {
                 break;
         }
         return result;
+    }
+
+    /**
+     * @desc 对常客积分计算组合使用提炼函数、搬移代码
+     * @author Robert-JQ
+     * @date 2018/5/9 23:51
+     * @return int
+     */
+    protected int getFrequentRenterPoints() {
+        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 }

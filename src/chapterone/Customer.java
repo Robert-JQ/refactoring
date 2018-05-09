@@ -44,11 +44,7 @@ public class Customer {
         int frequentRenterPoints = 0;
         String result = "chapterone.Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            frequentRenterPoints++;
-
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             //用查询代替临时变量(Replace Temp With Query)
             result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getCharge() + "\n";
@@ -59,6 +55,8 @@ public class Customer {
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
     }
+
+
 
     /**
      * @desc 将statement方法中的switch部分(逻辑泥团)提炼到独立函数中。变量rental不会被修改,
