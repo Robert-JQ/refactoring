@@ -44,17 +44,15 @@ public class Customer {
         int frequentRenterPoints = 0;
         String result = "chapterone.Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            double thisAmount;
-
-            thisAmount = rental.getCharge();
-
             frequentRenterPoints++;
 
             if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
                 frequentRenterPoints++;
             }
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
-            totalAmount += thisAmount;
+
+            //用查询代替临时变量(Replace Temp With Query)
+            result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getCharge() + "\n";
+            totalAmount += rental.getCharge();
         }
 
         result += "Amount owed is " + totalAmount + "\n";
