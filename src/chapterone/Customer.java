@@ -67,30 +67,30 @@ public class Customer {
      *        可以被当作参数传入。变量thisAmount会且只有这一个变量会被修改,可以把它当做返回值
      * @author Robert-JQ
      * @date 2018/5/9 22:51
-     * @param rental 租赁对象
+     * @param aRental 租赁对象
      * @return double
      */
-    private double amountFor(Rental rental) {
-        double thisAmount = 0;
-        switch (rental.getMovie().getPriceCode()) {
+    private double amountFor(Rental aRental) {
+        double result = 0;
+        switch (aRental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
-                thisAmount +=2;
-                if (rental.getDaysRented() > 2) {
-                    thisAmount += (rental.getDaysRented() - 2) * 1.5;
+                result +=2;
+                if (aRental.getDaysRented() > 2) {
+                    result += (aRental.getDaysRented() - 2) * 1.5;
                 }
                 break;
             case Movie.NEW_RELEASE:
-                thisAmount += rental.getDaysRented() * 3;
+                result += aRental.getDaysRented() * 3;
                 break;
             case Movie.CHILDREN:
-                thisAmount += 1.5;
-                if (rental.getDaysRented() > 3) {
-                    thisAmount += (rental.getDaysRented() - 3) * 1.5;
+                result += 1.5;
+                if (aRental.getDaysRented() > 3) {
+                    result += (aRental.getDaysRented() - 3) * 1.5;
                 }
                 break;
             default:
                 break;
         }
-        return thisAmount;
+        return result;
     }
 }
