@@ -46,7 +46,7 @@ public class Customer {
         for (Rental rental : rentals) {
             double thisAmount;
 
-            thisAmount = amountFor(rental);
+            thisAmount = rental.getCharge();
 
             frequentRenterPoints++;
 
@@ -71,26 +71,8 @@ public class Customer {
      * @return double
      */
     private double amountFor(Rental aRental) {
-        double result = 0;
-        switch (aRental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                result +=2;
-                if (aRental.getDaysRented() > 2) {
-                    result += (aRental.getDaysRented() - 2) * 1.5;
-                }
-                break;
-            case Movie.NEW_RELEASE:
-                result += aRental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDREN:
-                result += 1.5;
-                if (aRental.getDaysRented() > 3) {
-                    result += (aRental.getDaysRented() - 3) * 1.5;
-                }
-                break;
-            default:
-                break;
-        }
-        return result;
+        //amountFor函数可以去除了,也可以让它调用新函数。
+        // 如果它是一个public的函数,而我们又不想修改其他类的接口,这便是一种有用的手法
+        return aRental.getCharge();
     }
 }

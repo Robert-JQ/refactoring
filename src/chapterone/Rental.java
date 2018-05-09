@@ -29,4 +29,35 @@ public class Rental {
     public int getDaysRented() {
         return daysRented;
     }
+
+    /**
+     * @desc 原amountFor函数中只是用了Rental类的信息,却没有使用Customer类的信息,
+     *       将其移到Rental类中
+     * @author Robert-JQ
+     * @date 2018/5/9 23:20
+     * @return double
+     */
+    public double getCharge() {
+        double result = 0;
+        switch (getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                result += 2;
+                if (getDaysRented() > 2) {
+                    result += (getDaysRented() - 2) * 1.5;
+                }
+                break;
+            case Movie.NEW_RELEASE:
+                result += getDaysRented() * 3;
+                break;
+            case Movie.CHILDREN:
+                result += 1.5;
+                if (getDaysRented() > 3) {
+                    result += (getDaysRented() - 3) * 1.5;
+                }
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
 }
