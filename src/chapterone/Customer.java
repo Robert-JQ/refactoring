@@ -39,19 +39,13 @@ public class Customer {
      * @date 2018/5/8 23:47
      */
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         String result = "chapterone.Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            frequentRenterPoints += rental.getFrequentRenterPoints();
-
             //用查询代替临时变量(Replace Temp With Query)
             result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getCharge() + "\n";
-            totalAmount += rental.getCharge();
         }
-
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += "Amount owed is " + getTotalCharge() + "\n";
+        result += "You earned " + getFrequentRenterPoints() + " frequent renter points";
         return result;
     }
 
@@ -68,5 +62,33 @@ public class Customer {
         //amountFor函数可以去除了,也可以让它调用新函数。
         // 如果它是一个public的函数,而我们又不想修改其他类的接口,这便是一种有用的手法
         return aRental.getCharge();
+    }
+
+    /**
+     * @desc 计算顾客总费用
+     * @author jqq
+     * @date 2018/5/10 12:52
+     * @return double
+     */
+    private double getTotalCharge() {
+        double result = 0;
+        for (Rental rental : rentals) {
+            result += rental.getCharge();
+        }
+        return result;
+    }
+
+    /**
+     * @desc 计算常客积分
+     * @author jqq
+     * @date 2018/5/10 13:06
+     * @return int
+     */
+    private int getFrequentRenterPoints() {
+        int result = 0;
+        for (Rental rental : rentals) {
+            result += rental.getFrequentRenterPoints();
+        }
+        return result;
     }
 }
