@@ -44,41 +44,31 @@ public class Customer {
         int frequentRenterPoints = 0;
         String result = "chapterone.Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
-            double thisAmount = 0;
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
-            //根据不同类型的影片，租借时间的长短来计算费用
-            switch (rental.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount +=2;
-                    if (rental.getDaysRented() > 2) {
-                        thisAmount += (rental.getDaysRented() - 2) * 1.5;
-                    }
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += rental.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDREN:
-                    thisAmount += 1.5;
-                    if (rental.getDaysRented() > 3) {
-                        thisAmount += (rental.getDaysRented() - 3) * 1.5;
-                    }
-                    break;
-                default:
-
-            }
-
-            //计算积分
-            frequentRenterPoints++;
-
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
-            result += "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n";
-            totalAmount += thisAmount;
+            //用查询代替临时变量(Replace Temp With Query)
+            result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getCharge() + "\n";
+            totalAmount += rental.getCharge();
         }
 
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points";
         return result;
+    }
+
+
+
+    /**
+     * @desc 将statement方法中的switch部分(逻辑泥团)提炼到独立函数中。变量rental不会被修改,
+     *        可以被当作参数传入。变量thisAmount会且只有这一个变量会被修改,可以把它当做返回值
+     * @author Robert-JQ
+     * @date 2018/5/9 22:51
+     * @param aRental 租赁对象
+     * @return double
+     */
+    private double amountFor(Rental aRental) {
+        //amountFor函数可以去除了,也可以让它调用新函数。
+        // 如果它是一个public的函数,而我们又不想修改其他类的接口,这便是一种有用的手法
+        return aRental.getCharge();
     }
 }
