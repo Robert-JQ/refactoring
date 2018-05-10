@@ -46,6 +46,7 @@ public class Customer {
         for (Rental rental : rentals) {
             double thisAmount = 0;
 
+            //根据不同类型的影片，租借时间的长短来计算费用
             switch (rental.getMovie().getPriceCode()) {
                 case Movie.REGULAR:
                     thisAmount +=2;
@@ -66,6 +67,7 @@ public class Customer {
 
             }
 
+            //计算积分
             frequentRenterPoints++;
 
             if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
