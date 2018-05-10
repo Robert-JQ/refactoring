@@ -2,7 +2,7 @@ package chapterone;
 
 /**
  * @author Robert-JQ
- * @desc 影片,纯数据类
+ * @desc 影片, 纯数据类
  * @date 2018/05/08 23:09
  */
 public class Movie {

@@ -2,7 +2,7 @@ package chapterone;
 
 /**
  * @author Robert-JQ
- * @desc 租赁类,表示某个租客租了一部影片
+ * @desc 租赁类, 表示某个租客租了一部影片
  * @date 2018/05/08 23:18
  */
 public class Rental {
@@ -31,13 +31,13 @@ public class Rental {
     }
 
     /**
-     * @desc 原amountFor函数中只是用了Rental类的信息,却没有使用Customer类的信息,
-     *       将其移到Rental类中
+     * @return double
+     * @desc 原amountFor函数中只是用了Rental类的信息, 却没有使用Customer类的信息,
+     * 将其移到Rental类中
      * @author Robert-JQ
      * @date 2018/5/9 23:20
-     * @return double
      */
-    protected double getCharge() {
+    double getCharge() {
         double result = 0;
         switch (getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -62,12 +62,12 @@ public class Rental {
     }
 
     /**
+     * @return int
      * @desc 对常客积分计算组合使用提炼函数、搬移代码
      * @author Robert-JQ
      * @date 2018/5/9 23:51
-     * @return int
      */
-    protected int getFrequentRenterPoints() {
+    int getFrequentRenterPoints() {
         if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1) {
             return 1;
         } else {
