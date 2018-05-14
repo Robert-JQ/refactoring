@@ -49,6 +49,24 @@ public class Customer {
         return result;
     }
 
+    /**
+     * @desc 生成html格式的报表
+     * @author Robert-JQ
+     * @date 2018/5/14 22:52
+     * @return java.lang.String
+     */
+    public String htmlStatement() {
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+        for (Rental rental : rentals) {
+            //show figures for each rental
+            result += rental.getMovie().getTitle() + ": " + rental.getCharge() + "<BR>\n";
+        }
+        //add footer line
+        result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
+        result += "On this rental you earned <EM>" + getFrequentRenterPoints() + "</EM> frequent renter points<P>";
+        return result;
+    }
+
 
     /**
      * @param aRental 租赁对象
@@ -65,10 +83,10 @@ public class Customer {
     }
 
     /**
+     * @return double
      * @desc 计算顾客总费用
      * @author jqq
      * @date 2018/5/10 12:52
-     * @return double
      */
     private double getTotalCharge() {
         double result = 0;
@@ -79,10 +97,10 @@ public class Customer {
     }
 
     /**
+     * @return int
      * @desc 计算常客积分
      * @author jqq
      * @date 2018/5/10 13:06
-     * @return int
      */
     private int getFrequentRenterPoints() {
         int result = 0;
