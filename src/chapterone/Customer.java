@@ -45,7 +45,7 @@ public class Customer {
             result += "\t" + rental.getMovie().getTitle() + "\t" + rental.getCharge() + "\n";
         }
         result += "Amount owed is " + getTotalCharge() + "\n";
-        result += "You earned " + getFrequentRenterPoints() + " frequent renter points";
+        result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
         return result;
     }
 
@@ -63,7 +63,7 @@ public class Customer {
         }
         //add footer line
         result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
-        result += "On this rental you earned <EM>" + getFrequentRenterPoints() + "</EM> frequent renter points<P>";
+        result += "On this rental you earned <EM>" + getTotalFrequentRenterPoints() + "</EM> frequent renter points<P>";
         return result;
     }
 
@@ -102,7 +102,7 @@ public class Customer {
      * @author jqq
      * @date 2018/5/10 13:06
      */
-    private int getFrequentRenterPoints() {
+    private int getTotalFrequentRenterPoints() {
         int result = 0;
         for (Rental rental : rentals) {
             result += rental.getFrequentRenterPoints();
